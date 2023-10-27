@@ -1,4 +1,4 @@
-# SQL Alchemy Challenge
+# SQLAlchemy Challenge
 
 **Student name:** Tania Barrera
 
@@ -28,7 +28,7 @@ In this section, you’ll use Python and SQLAlchemy to do a basic climate analys
 
 4. Link Python to the database by creating a SQLAlchemy session.
 
-    > **IMPORTANT**
+    > **IMPORTANT**  
     > Remember to close your session at the end of your notebook.
 
 5. Perform a precipitation analysis and then a station analysis by completing the steps in the following two subsections.
@@ -39,7 +39,7 @@ In this section, you’ll use Python and SQLAlchemy to do a basic climate analys
 
 2. Using that date, get the previous 12 months of precipitation data by querying the previous 12 months of data.
 
-    > **HINT**
+    > **HINT**  
     > Don’t pass the date as a variable to your query.
 
 1. Select only the "date" and "prcp" values.
@@ -62,14 +62,14 @@ In this section, you’ll use Python and SQLAlchemy to do a basic climate analys
 
     - List the stations and observation counts in descending order.
 
-        > **HINT**
+        > **HINT**  
         > You’ll need to use the `func.count` function in your query.
 
     - Answer the following question: which station id has the greatest number of observations?
 
 3. Design a query that calculates the lowest, highest, and average temperatures that filters on the most-active station id found in the previous query.
 
-    > **HINT**
+    > **HINT**  
     > You’ll need to use functions such as `func.min`, `func.max`, and `func.avg` in your query.
 
 4. Design a query to get the previous 12 months of temperature observation (TOBS) data. To do so, complete the following steps:
