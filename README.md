@@ -4,6 +4,32 @@
 
 ---
 
+- [Instructions](#instructions)
+  - [Part 1: Analyze and Explore the Climate Data](#part-1-analyze-and-explore-the-climate-data)
+    - [Precipitation Analysis](#precipitation-analysis)
+    - [Station Analysis](#station-analysis)
+  - [Part 2: Design Your Climate App](#part-2-design-your-climate-app)
+- [Hints](#hints)
+- [Requirements](#requirements)
+  - [Jupyter Notebook Database Connection (10 points)](#jupyter-notebook-database-connection-10-points)
+    - [To receive all points, you must](#to-receive-all-points-you-must)
+  - [Precipitation Analysis (16 points)](#precipitation-analysis-16-points)
+    - [To receive all points, you must](#to-receive-all-points-you-must-1)
+  - [Station Analysis (16 points)](#station-analysis-16-points)
+    - [To receive all points, you must](#to-receive-all-points-you-must-2)
+  - [API SQLite Connection \& Landing Page (10 points)](#api-sqlite-connection--landing-page-10-points)
+    - [To receive all points, your Flask application must](#to-receive-all-points-your-flask-application-must)
+  - [API Static Routes (15 points)](#api-static-routes-15-points)
+    - [To receive all points, your Flask application must include](#to-receive-all-points-your-flask-application-must-include)
+  - [API Dynamic Route (15 points)](#api-dynamic-route-15-points)
+    - [To receive all points, your Flask application must include](#to-receive-all-points-your-flask-application-must-include-1)
+  - [Coding Conventions and Formatting (8 points)](#coding-conventions-and-formatting-8-points)
+    - [To receive all points, your code must](#to-receive-all-points-your-code-must)
+  - [Deployment and Submission (6 points)](#deployment-and-submission-6-points)
+    - [To receive all points, you must](#to-receive-all-points-you-must-3)
+  - [Comments (4 points)](#comments-4-points)
+    - [To receive all points, your code must](#to-receive-all-points-your-code-must-1)
+- [References](#references)
 
 
 ---
