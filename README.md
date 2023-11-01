@@ -4,7 +4,7 @@
 
 ---
 
-- [Instructions](#instructions)
+<!-- - [Instructions](#instructions)
   - [Part 1: Analyze and Explore the Climate Data](#part-1-analyze-and-explore-the-climate-data)
     - [Precipitation Analysis](#precipitation-analysis)
     - [Station Analysis](#station-analysis)
@@ -29,12 +29,20 @@
     - [To receive all points, you must](#to-receive-all-points-you-must-3)
   - [Comments (4 points)](#comments-4-points)
     - [To receive all points, your code must](#to-receive-all-points-your-code-must-1)
-- [References](#references)
+- [References](#references) -->
 
 
 ---
 
 This repo contains my work for the challenge that corresponds to Module 10 of the UofT SCS edX Data Bootcamp.
+
+---
+
+Analysis notebook: [SurfsUp/climate_analysis.ipynb](SurfsUp/climate_analysis.ipynb)
+
+App script: [SurfsUp/app.py](SurfsUp/app.py)
+
+---
 
 ---
 
