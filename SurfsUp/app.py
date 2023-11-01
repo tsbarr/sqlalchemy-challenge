@@ -95,8 +95,8 @@ def stations():
     return jsonify(stations_list)
 
 
-
-
+# Close Session
+session.close()
 
 
 if __name__ == "__main__":
