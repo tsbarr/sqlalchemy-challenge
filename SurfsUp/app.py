@@ -26,11 +26,50 @@ Station = Base.classes.station
 # Create our session (link) from Python to the DB
 session = Session(engine)
 
+# Define function to use in both dynamic routes
+def start_end_tobs(start, end):
+    # Try to convert start to date type
+    try:
+        start = pd.to_datetime(start).date()
+    # if date is out of bounds, find the closest option
+    except pd._libs.tslibs.np_datetime.OutOfBoundsDatetime:
+        min_date = session.query(func.min(Measurement.date)).all()
+        # Convert to a date object
+        start = pd.to_datetime(min_date[0][0]).date()
+    # Try to convert end to date type
+    try:
+        end = pd.to_datetime(end).date()
+    # if date is out of bounds, find the closest option
+    except pd._libs.tslibs.np_datetime.OutOfBoundsDatetime:
+        # Use most_recent_date
+        end = most_recent_date
+    # Query filtering desired dates
+    query_results = (session
+        .query(
+            func.min(Measurement.tobs),
+            func.max(Measurement.tobs),
+            func.avg(Measurement.tobs),
+        )
+        .filter(Measurement.date >= start)
+        .filter(Measurement.date <= end)
+        .all()
+        )
+    # Put results into a dictionary
+    result_dict = {
+            'min_tobs': query_results[0][0],
+            'max_tobs': query_results[0][1],
+            'avg_tobs': query_results[0][2]
+        }
+    return result_dict
+
+# Define variables used in more than one route ---
+
 # Find the most recent date in the data set.
 # We can use func.max to find the biggest date
 most_recent_date = session.query(func.max(Measurement.date)).all()
 # Convert most recent date to a date object
 most_recent_date = pd.to_datetime(most_recent_date[0][0]).date()
+# Find date that is one year before most_recent_date
 lower_limit_date = most_recent_date.replace(year=most_recent_date.year - 1)
 
 # Find the most active station by querying station activity
@@ -71,6 +110,7 @@ def home():
         <li>/api/v1.0/tobs</li>
     </ul>
     <p>Available dynamic routes:</p>
+    <p>Note that &lt;start&gt; and &lt;end&gt; stand for date parameters to limit the results.<br/>They should be entered using YYYY-MM-DD format.<br/>If using dates that are out of bounds, the results returned use the most recent date as end point and the earliest date as start point.</p>
     <ul>
         <li>/api/v1.0/&lt;start&gt;</li>
         <li>/api/v1.0/&lt;start&gt;/&lt;end&gt;</li>
@@ -81,6 +121,7 @@ def home():
 # Define what to do when a user hits the /api/v1.0/precipitation route
 @app.route("/api/v1.0/precipitation")
 def precipitation():
+    print("Server received request for 'precipitation' page...")
     # Perform a query to retrieve the date and precipitation scores
     prcp_query = (session
         .query(Measurement.date, Measurement.prcp)
@@ -102,7 +143,6 @@ def precipitation():
             # In which case, create key this_date
             #  with value of a list with one element: this_prcp
             prcp_dict[this_date] = [this_prcp]
-    print("Server received request for 'precipitation' page...")
     return jsonify(prcp_dict)
 
 
@@ -128,6 +168,7 @@ def stations():
         stations_list.append(this_station)
     return jsonify(stations_list)
 
+# Define what to do when a user hits the /api/v1.0/tobs route
 @app.route("/api/v1.0/tobs")
 def tobs():
     print("Server received request for 'tobs' page...")
@@ -142,6 +183,21 @@ def tobs():
     tobs_list = [row[0] for row in tobs_query]
     return jsonify(tobs_list)
 
+# Define what to do when a user hits the /api/v1.0/<start> route
+@app.route("/api/v1.0/<start>")
+def start(start):
+    print(f"Server received request for 'start' page with start = {start}...")
+    # use most_recent_date as end date
+    start_dict = start_end_tobs(start, most_recent_date)
+    return jsonify(start_dict)
+
+# Define what to do when a user hits the /api/v1.0/<start>/<end> route
+@app.route("/api/v1.0/<start>/<end>")
+def start_end(start, end):
+    print(f"Server received request for 'start/end' page with start = {start}, and end = {end}...")
+    # use provided dates
+    start_end_dict = start_end_tobs(start, end)
+    return jsonify(start_end_dict)
 
 # Close Session
 session.close()
